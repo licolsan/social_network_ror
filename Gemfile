@@ -17,7 +17,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'jwt', '~> 2.2', '>= 2.2.1'
-gem 'oauth2', '~> 1.2'
+gem 'omniauth-facebook', '~> 5.0'
+gem 'omniauth-google-oauth2', '~> 0.8.0'
 gem 'dotenv-rails', groups: [:development, :test]
 
 group :development, :test do
