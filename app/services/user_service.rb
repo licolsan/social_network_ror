@@ -10,8 +10,4 @@ class UserService
       user.save!
   	end
   end
-
-  def create_token(user_id)
-    JwtHelper.encode(user_id)
-  end
 end
