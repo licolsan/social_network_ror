@@ -1,15 +1,179 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SocialNetworkRor</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+    <title>Social Network</title>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tags %>
+		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+		<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
+    	body {
+    		background-color: <%= current_user.color if current_user %>;
+    	}
+    </style>
   </head>
 
-  <body>
-    <%= yield %>
-  </body>
+  <body class="non_responsive">
+	  <% if current_user %>
+			<nav class="navbar navbar-default nav_bar navbar-fixed-top">
+				<div class="col-xs-1"></div>
+				<div class="col-xs-10">
+					<div class="container-fluid">
+				    <div class="navbar-header">
+				    	<%= image_tag("/icon/brand.png", alt: "brand_icon") %>
+				    </div>
+				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				      <div class="navbar-form navbar-left">
+				      	<ul class="nav navbar-nav">
+				      		<li><%= link_to "HOME", root_path %></li>
+				      		<li><a href="">ALL PAGES</a></li>
+				      		<li><a href="">SHORTCODES</a></li>
+									<li><a href="">ALL ELEMENT</a></li>
+									<li>
+									<%= link_to destroy_user_session_path, :method => :delete do %>
+										<span class="glyphicon glyphicon-off"></span>
+										Log out
+									<% end %>
+									</li>
+				      	</ul>
+				      	<div class="input-group">
+					        <input type="text" class="form-control search_something" placeholder="Search for anything" />
+				      	</div>
+								<button type="button" class="btn btn-warning add_post_home">
+				          <span class="glyphicon glyphicon-plus"></span> ADD POST
+				        </button>
+				      </div>
+				      <div class="navbar-form navbar-right">
+				      	<div class="btn-group">
+								  <div data-toggle="dropdown">
+								  	<a href="">
+								  		<span class="num_of_notificcation pink_noti"></span>
+								  		<span class="glyphicon glyphicon-user glyphicon_noti"></span>
+								  	</a>
+								  </div>
+								  <ul class="dropdown-menu dropdown_menu">
+									  <div class="container">
+									  	<li>
+									  		All requests
+									  	</li>
+									  </div>
+								  	<li role="separator" class="divider"></li>
+								  </ul>
+								</div>
+								<div class="btn-group">
+								  <div data-toggle="dropdown">
+								  	<a href="">
+								  		<span class="num_of_notificcation green_noti"></span>
+								  		<span class="glyphicon glyphicon-comment glyphicon_noti"></span>
+								  	</a>
+								  </div>
+								  <ul class="dropdown-menu dropdown_menu">
+                    <div class="container">
+                    </div>
+								  	<li role="separator" class="divider"></li>
+								  </ul>
+								</div>
+				      	<div class="btn-group">
+								  <div data-toggle="dropdown">
+								  	<a href="">
+								  		<span class="num_of_notificcation orange_noti"></span>
+								  		<span class="glyphicon glyphicon-bell glyphicon_noti"></span>
+								  	</a>
+								  </div>
+								  <ul class="dropdown-menu dropdown_menu">
+										<div class="container">
+									  	<li>All notifications</li>
+									  </div>
+								  	<li role="separator" class="divider"></li>
+								  </ul>
+								</div>
+								<div class="btn-group">
+								  <div data-toggle="dropdown">
+								  </div>
+								  <ul class="dropdown-menu">
+                    <li>
+								  		<a href="">
+								  			<span class="glyphicon glyphicon-folder-close"></span>
+								  			Saved Articles
+								  		</a>
+								  	</li>
+								  	<li role="separator" class="divider"></li>
+								  	<li role="separator" class="divider"></li>
+										<li>
+								  		<a href="">
+									  		<span class="glyphicon glyphicon-bell"></span>
+									  		Notification settings
+								  		</a>
+								  	</li>
+								  	<li>
+								  		<a href="">
+									  		<span class="glyphicon glyphicon-lock"></span>
+									  		Change Password
+								  		</a>
+								  	</li>
+										<li role="separator" class="divider"></li>
+										<li>
+								  		<a href="">
+								  			<span class="glyphicon glyphicon-cog"></span>
+								  			Settings
+								  		</a>
+								  	</li>
+								  	<li>
+								  		<a href="">
+								  			<span class="glyphicon glyphicon-flag"></span>
+								  			Private Policy
+								  		</a>
+								  	</li>
+								  	<li>
+								  		<a href="">
+								  			<span class="glyphicon glyphicon-stats"></span>
+								  			FAQ
+								  		</a>
+								  	</li>
+								  	<li>
+								  		<%= link_to destroy_user_session_path, :method => :delete do %>
+								  			<span class="glyphicon glyphicon-off"></span>
+								  			Log out
+								  		<% end %>
+								  	</li>
+								  </ul>
+								</div>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				<div class="col-xs-1"></div>
+			</nav>
+			<div class="virtual_nav"></div>
+			<%= yield :head %>
+			<div class="row">
+				<div class="container">
+				  <div class="col-xs-7">
+					  <% if flash[:notice] %>
+					  	<div class="alert-info" align="center">
+					  		<%= flash[:notice] %>
+					  	</div>
+					  <% end %>
+					  <div class="yield_content">
+					  	<%= yield %>
+					  </div>
+				  </div>
+				</div>
+			</div>
+		<% else %>
+			<div class="container" align="center">
+				<div class="alert-success">
+					<% if notice %>
+			  		<%= notice %>
+			  	<% end %>
+		  	</div>
+		  	<div class="alert-danger">
+			  	<% if alert %>
+			  		<%= alert %>
+			  	<% end %>
+		  	</div>
+				<%= yield %>
+			</div>
+		<% end %>
+	</body>
 </html>
