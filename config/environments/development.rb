@@ -21,7 +21,7 @@ Rails.application.configure do
 
   config.active_storage.service = :local
 
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
 
@@ -38,4 +38,15 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: ENV['EMAIL_HOST'], protocol: 'http' }
+  ActionMailer::Base.smtp_settings = {
+    :address        => ENV['EMAIL_DOMAIN'],
+    :port           => ENV['EMAIL_PORT'],
+    :authentication => :plain,
+    :user_name      => ENV['EMAIL_USERNAME'],
+    :password       => ENV['EMAIL_PASSWORD'],
+    # :enable_starttls_auto => true
+  }
 end
