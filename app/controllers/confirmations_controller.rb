@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class ConfirmationsController < Devise::ConfirmationsController
+
+  before_action :get_services, only: [ :show ]
+
   # GET /resource/confirmation/new
   def new
     super
@@ -14,7 +17,7 @@ class ConfirmationsController < Devise::ConfirmationsController
   # GET /resource/confirmation?confirmation_token=abcdef
   def show
     super
-    UserService.new.send_welcome_email(resource) if resource.errors.empty?
+    @user_service.send_welcome_email(resource) if resource.errors.empty?
   end
 
   protected
@@ -27,5 +30,11 @@ class ConfirmationsController < Devise::ConfirmationsController
   # The path used after confirmation.
   def after_confirmation_path_for(resource_name, resource)
     super(resource_name, resource)
+  end
+
+  private
+  
+  def get_services
+    @user_service = UserService.new
   end
 end

@@ -4,4 +4,6 @@ Rails.application.routes.draw do
     confirmations: "confirmations",
     omniauth_callbacks: "auths"
   }
+
+  resources :users, except: [ :new, :create, :destroy ]
 end

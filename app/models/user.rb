@@ -6,8 +6,8 @@ class User < ApplicationRecord
 				 
 	validates :email, presence: true, uniqueness: true
 	validates :name, presence: true
-	# validates :date_of_birth, presence: true
-	# validates :avatar, presence: true
+	validates :avatar, presence: true
+	has_one_attached :avatar
 
 	attr_accessor :skip_password_validation  # virtual attribute to skip password validation while saving
 
