@@ -1,4 +1,7 @@
 Rails.application.configure do
+
+  env = Rails.application.credentials.env
+
   config.cache_classes = false
 
   config.eager_load = false
@@ -40,20 +43,20 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.active_job.queue_adapter     = :sidekiq
-  config.active_job.queue_name_prefix = ENV['QUEUE_NAME_PREFIX']
+  config.active_job.queue_name_prefix = env[:queue_name_prefix]
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.deliver_later_queue_name = ENV['EMAIL_QUEUE_NAME']
+  config.action_mailer.deliver_later_queue_name = env[:email_queue_name]
   config.action_mailer.default_url_options = {
-    host: ENV['EMAIL_HOST'],
-    protocol: ENV['PROTOCOL']
+    host: env[:email_host],
+    protocol: env[:protocol],
   }
   ActionMailer::Base.smtp_settings = {
-    :address        => ENV['EMAIL_DOMAIN'],
-    :port           => ENV['EMAIL_PORT'],
+    :address        => env[:email_domain],
+    :port           => env[:email_port],
     :authentication => :plain,
-    :user_name      => ENV['EMAIL_USERNAME'],
-    :password       => ENV['EMAIL_PASSWORD'],
+    :user_name      => env[:email_username],
+    :password       => env[:email_password],
     # :enable_starttls_auto => true
   }
 end
