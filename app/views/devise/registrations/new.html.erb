@@ -12,6 +12,8 @@
       <div class="input-group" class="input_field">
         <%= f.text_field :name, required: true, class: "form-control", placeholder: "Full Name" %><br/><br/>
         <%= f.email_field :email, required: true, class: "form-control", placeholder: "Email" %><br/><br/>
+        <%= f.file_field :avatar, class: "form-control" %><br/><br/>
+        <%= f.date_field :date_of_birth, required: true, class: "form-control" %><br/><br/>
         <%= f.password_field :password, required: true, class: "form-control", placeholder: "Password" %><br/><br/>
         <%= f.password_field :password_confirmation, required: true, class: "form-control", placeholder: "Password confirmation" %><br/><br/>
       </div>

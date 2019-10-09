@@ -1,4 +1,4 @@
-namespace :db_task do
+namespace :database do
   desc "TODO"
   task reset: :environment do
     Rake::Task['db:drop'].invoke

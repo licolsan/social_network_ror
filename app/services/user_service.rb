@@ -1,17 +1,26 @@
+require 'open-uri'
+
 class UserService
   
   def find_or_create_from_auth(auth)
-    User.where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    User.find_or_initialize_by(provider: auth.provider, uid: auth.uid) do |user|
 			user.email = auth.info.email
-  		user.name = auth.info.name
-			user.avatar = (auth.info.image + "?type=large") if auth.info.image?
+      user.name = auth.info.name
+      user.avatar.attach(
+        io: open(auth.info.image + "?type=large"),
+        filename: 'file-name.jpg'
+      ) if auth.info.image?
   		user.provider = auth.provider
-      user.password = rand().to_s
+      user.skip_password_validation = true
       user.save!
   	end
   end
 
-  def create_token(user_id)
-    JwtHelper.encode(user_id)
+  def update_user(user, attrs)
+    user.update_attributes(attrs)
+  end
+
+  def send_welcome_email(user)
+    UserMailer.with(user: user).welcome_email.deliver_later
   end
 end

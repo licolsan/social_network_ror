@@ -18,11 +18,9 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
 
-gem 'jwt', '~> 2.2', '>= 2.2.1'
 gem 'omniauth-facebook', '~> 5.0'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
-gem 'dotenv-rails'
-
+gem 'sidekiq', '~> 6.0', '>= 6.0.1'
 gem 'devise', '~> 4.7'
 
 group :development, :test do
@@ -34,6 +32,12 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  # pry
+  gem 'pry-rails'
+  gem 'pry-doc'
+  gem 'pry-byebug'
+  gem 'pry-stack_explorer'
 end
 
 group :test do

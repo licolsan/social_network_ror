@@ -30,6 +30,11 @@
 				      		<li><a href="">SHORTCODES</a></li>
 									<li><a href="">ALL ELEMENT</a></li>
 									<li>
+										<%= link_to edit_user_path(current_user) do %>
+											<span class="glyphicon glyphicon-pencil"></span>
+											Edit profiles
+										<% end %>
+									<li>
 									<%= link_to destroy_user_session_path, :method => :delete do %>
 										<span class="glyphicon glyphicon-off"></span>
 										Log out
