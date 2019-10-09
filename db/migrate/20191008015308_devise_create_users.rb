@@ -14,7 +14,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.boolean :is_lock,                        default: false
       t.integer :country_id
       t.integer :city_id
-      t.datetime :date_of_birth,    null: false, default: -> { 'CURRENT_TIMESTAMP' }
+      t.datetime :date_of_birth
       t.string :email,              null: false
       t.string :encrypted_password
 
