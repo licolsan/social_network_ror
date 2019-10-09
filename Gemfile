@@ -21,7 +21,7 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
 gem 'omniauth-facebook', '~> 5.0'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
 gem 'dotenv-rails'
-
+gem 'sidekiq', '~> 6.0', '>= 6.0.1'
 gem 'devise', '~> 4.7'
 
 group :development, :test do

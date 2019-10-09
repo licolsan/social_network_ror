@@ -1,0 +1,2 @@
+:queues:
+  - <%= ENV['QUEUE_NAME_PREFIX'] + '_' + ENV['EMAIL_QUEUE_NAME'] %>
