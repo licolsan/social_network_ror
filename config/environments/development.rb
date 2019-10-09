@@ -23,7 +23,7 @@ Rails.application.configure do
 
   config.action_mailer.raise_delivery_errors = true
 
-  config.action_mailer.perform_caching = false
+  config.action_mailer.perform_caching = true
 
   config.active_support.deprecation = :log
 
@@ -39,8 +39,15 @@ Rails.application.configure do
 
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  config.active_job.queue_adapter     = :sidekiq
+  config.active_job.queue_name_prefix = ENV['QUEUE_NAME_PREFIX']
+
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: ENV['EMAIL_HOST'], protocol: 'http' }
+  config.action_mailer.deliver_later_queue_name = ENV['EMAIL_QUEUE_NAME']
+  config.action_mailer.default_url_options = {
+    host: ENV['EMAIL_HOST'],
+    protocol: ENV['PROTOCOL']
+  }
   ActionMailer::Base.smtp_settings = {
     :address        => ENV['EMAIL_DOMAIN'],
     :port           => ENV['EMAIL_PORT'],
