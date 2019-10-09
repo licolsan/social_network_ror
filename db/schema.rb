@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2019_10_08_015308) do
     t.integer "city_id"
     t.datetime "date_of_birth", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.string "email", null: false
-    t.string "encrypted_password", default: "", null: false
+    t.string "encrypted_password"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

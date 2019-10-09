@@ -16,7 +16,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.integer :city_id
       t.datetime :date_of_birth,    null: false, default: -> { 'CURRENT_TIMESTAMP' }
       t.string :email,              null: false
-      t.string :encrypted_password, null: false, default: ""
+      t.string :encrypted_password
 
       # Recoverable
       t.string   :reset_password_token
