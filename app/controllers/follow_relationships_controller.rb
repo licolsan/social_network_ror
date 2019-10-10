@@ -1,7 +1,7 @@
 class FollowRelationshipsController < ApplicationController
 
   FOLLOWING = "following"
-  FOLLOWER = "followeR"
+  FOLLOWER = "follower"
 
   before_action :get_services
 

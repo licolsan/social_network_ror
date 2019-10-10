@@ -47,4 +47,16 @@ class UserService
   def stop_follow(current_user, target_user)
     current_user.stop_following(target_user)
   end
+
+  def get_user(current_user, target_user_id)
+    target_user = User.find(target_user_id)
+    if (
+      current_user.following?(target_user) ||
+      current_user.id == target_user.id
+    )
+      target_user
+    else
+      nil
+    end
+  end
 end

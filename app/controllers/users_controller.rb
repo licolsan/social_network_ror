@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :get_services, only: [ :index, :edit, :update ]
+  before_action :get_services, only: [ :index, :show, :edit, :update ]
   before_action :find_user, only: [ :edit, :update ]
   before_action :is_current_user, only: [ :edit, :update ]
   skip_before_action :finish_profile, only: [ :edit, :update ]
@@ -10,6 +10,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = @user_service.get_user(current_user, params[:id])
+    redirect_back(fallback_location: root_path) if @user.nil?
   end
 
   def edit
@@ -18,11 +20,10 @@ class UsersController < ApplicationController
   def update
     if @user_service.update_user(@user, user_params)
       flash[:notice] = "Your profile has been update!"
-      redirect_to root_path
     else
       flash[:notice] = user.errors
-      redirect_back(fallback_location: root_path)
     end
+    redirect_back(fallback_location: root_path)
   end
   
   private
