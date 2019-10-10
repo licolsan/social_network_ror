@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
 
-  before_action :get_services, only: [ :edit, :update ]
+  before_action :get_services, only: [ :index, :edit, :update ]
   before_action :find_user, only: [ :edit, :update ]
   before_action :is_current_user, only: [ :edit, :update ]
   skip_before_action :finish_profile, only: [ :edit, :update ]
 
   def index
+    @users = @user_service.get_all_except(current_user)
   end
 
   def show
