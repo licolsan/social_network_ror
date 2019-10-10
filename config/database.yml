@@ -2,10 +2,8 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  # username: app_user
-  # password: app_password
-  username: <%= Rails.application.credentials.env[:db_username] %>
-  password: <%= Rails.application.credentials.env[:db_password] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
 
 development:
   <<: *default

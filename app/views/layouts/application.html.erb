@@ -30,10 +30,29 @@
 				      		<li><a href="">SHORTCODES</a></li>
 									<li><a href="">ALL ELEMENT</a></li>
 									<li>
+										<%= link_to users_path do %>
+											<span class="glyphicon glyphicon-user"></span>
+											All users
+										<% end %>
+									</li>
+									<li>
+										<%= link_to follow_list_path(type: "following") do %>
+											<span class="glyphicon glyphicon-user"></span>
+											Following users
+										<% end %>
+									</li>
+									<li>
+									<%= link_to follow_list_path(type: "follower") do %>
+											<span class="glyphicon glyphicon-user"></span>
+											Followers
+										<% end %>
+									</li>
+									<li>
 										<%= link_to edit_user_path(current_user) do %>
 											<span class="glyphicon glyphicon-pencil"></span>
 											Edit profiles
 										<% end %>
+									</li>
 									<li>
 									<%= link_to destroy_user_session_path, :method => :delete do %>
 										<span class="glyphicon glyphicon-off"></span>
@@ -41,12 +60,6 @@
 									<% end %>
 									</li>
 				      	</ul>
-				      	<div class="input-group">
-					        <input type="text" class="form-control search_something" placeholder="Search for anything" />
-				      	</div>
-								<button type="button" class="btn btn-warning add_post_home">
-				          <span class="glyphicon glyphicon-plus"></span> ADD POST
-				        </button>
 				      </div>
 				      <div class="navbar-form navbar-right">
 				      	<div class="btn-group">

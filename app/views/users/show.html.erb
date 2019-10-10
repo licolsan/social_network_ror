@@ -1,0 +1,10 @@
+<div class="container">
+  <div style="height:100px;">
+  </div>
+    <div class="col-xs-1" style="height: 10px, width: 10px">
+      <%= image_tag @user.avatar, alt: "user_avatar", class: "user_avatar" %>
+    </div>
+    <div class="col-xs-2">
+      <%= link_to @user.name, user_path(@user) %>
+    </div>
+</div>
