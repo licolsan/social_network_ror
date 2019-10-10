@@ -23,4 +23,40 @@ class UserService
   def send_welcome_email(user)
     UserMailer.with(user: user).welcome_email.deliver_later
   end
+
+  def is_current_user(current_user_id, target_user_id)
+    current_user_id == target_user_id
+  end
+
+  def get_all_except(user)
+    User.all_except(user)
+  end
+
+  def get_following_of(current_user)
+    current_user.following_by_type(current_user.class.name)
+  end
+
+  def get_follower_of(current_user)
+    current_user.followers_by_type(current_user.class.name)
+  end
+
+  def start_follow(current_user, target_user)
+    current_user.follow(target_user)
+  end
+
+  def stop_follow(current_user, target_user)
+    current_user.stop_following(target_user)
+  end
+
+  def get_user(current_user, target_user_id)
+    target_user = User.find(target_user_id)
+    if (
+      current_user.following?(target_user) ||
+      current_user.id == target_user.id
+    )
+      target_user
+    else
+      nil
+    end
+  end
 end

@@ -9,7 +9,12 @@ class User < ApplicationRecord
 	validates :avatar, presence: true
 	has_one_attached :avatar
 
+	acts_as_follower
+	acts_as_followable
+
 	attr_accessor :skip_password_validation  # virtual attribute to skip password validation while saving
+
+	scope :all_except, -> (user) { where.not(id: user.id) }
 
   protected
 

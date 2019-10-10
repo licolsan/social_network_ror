@@ -23,6 +23,12 @@ gem 'omniauth-google-oauth2', '~> 0.8.0'
 gem 'sidekiq', '~> 6.0', '>= 6.0.1'
 gem 'devise', '~> 4.7'
 
+# For env configuration
+gem 'figaro', '~> 1.1', '>= 1.1.1'
+
+# Model following gem
+gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
