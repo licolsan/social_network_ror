@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   before_action :get_services, only: [ :edit, :update ]
   before_action :find_user, only: [ :edit, :update ]
+  before_action :is_current_user, only: [ :edit, :update ]
   skip_before_action :finish_profile, only: [ :edit, :update ]
 
   def index
@@ -31,6 +32,13 @@ class UsersController < ApplicationController
 
   def find_user
     @user = User.find(params[:id])
+  end
+
+  def is_current_user
+    if !@user_service.is_current_user(current_user.id, @user.id)
+      flash[:notice] = "You are not allow for this operation"
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def get_services
