@@ -1,0 +1,22 @@
+# Config for database connection
+DB_USERNAME: <%= Rails.application.credentials.env[:db_username] %>
+DB_PASSWORD: <%= Rails.application.credentials.env[:db_password] %>
+
+# For sending email
+EMAIL_HOST: <%= Rails.application.credentials.env[:email_host] %>
+EMAIL_DOMAIN: <%= Rails.application.credentials.env[:email_domain] %>
+EMAIL_USERNAME: <%= Rails.application.credentials.env[:email_username] %>
+EMAIL_PASSWORD: <%= Rails.application.credentials.env[:email_password] %>
+EMAIL_PORT: <%= Rails.application.credentials.env[:port] %>
+PROTOCOL: <%= Rails.application.credentials.env[:protocol] %>
+EMAIL_QUEUE_NAME: <%= Rails.application.credentials.env[:email_queue_name] %>
+
+# For backend queue
+QUEUE_NAME_PREFIX: <%= Rails.application.credentials.env[:queue_name_prefix] %>
+
+# For OAuth
+GOOGLE_CLIENT_ID: <%= Rails.application.credentials.env[:google_client_id] %>
+GOOGLE_CLIENT_SECRET: <%= Rails.application.credentials.env[:google_client_secret] %>
+
+FACEBOOK_CLIENT_ID: <%= Rails.application.credentials.env[:facebook_client_id] %>
+FACEBOOK_CLIENT_SECRET: <%= Rails.application.credentials.env[:facebook_client_secret] %>

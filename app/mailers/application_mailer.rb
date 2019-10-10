@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: Rails.application.credentials.env[:email_username]
+  default from: ENV['EMAIL_USERNAME']
   layout 'mailer'
 end

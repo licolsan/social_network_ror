@@ -22,6 +22,7 @@ gem 'omniauth-facebook', '~> 5.0'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
 gem 'sidekiq', '~> 6.0', '>= 6.0.1'
 gem 'devise', '~> 4.7'
+gem 'figaro', '~> 1.1', '>= 1.1.1'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
