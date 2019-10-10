@@ -27,7 +27,7 @@ gem 'devise', '~> 4.7'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
 
 # Model following gem
-gem 'acts_as_follower', '~> 0.2.1'
+gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

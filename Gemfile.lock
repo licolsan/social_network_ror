@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/tcocca/acts_as_follower.git
+  revision: c5ac7b9601c4af01eb4d9112330b27be4d694ecc
+  branch: master
+  specs:
+    acts_as_follower (0.2.1)
+      activerecord (>= 4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -56,7 +64,6 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.1, >= 2.1.8)
-    acts_as_follower (0.2.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     autoprefixer-rails (9.6.4)
@@ -281,7 +288,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  acts_as_follower (~> 0.2.1)
+  acts_as_follower!
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   bootstrap-sass (~> 3.3, >= 3.3.7)
