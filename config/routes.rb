@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   root 'pages#index'
   devise_for :users, controllers: {
     confirmations: "confirmations",
@@ -6,6 +7,8 @@ Rails.application.routes.draw do
   }
 
   resources :users, except: [ :new, :create, :destroy ]
+
+  resources :posts
 
   get "user/follow/:type" => "follow_relationships#index", as: "follow_list"
   post "follow/:id" => "follow_relationships#create", as: "follow"

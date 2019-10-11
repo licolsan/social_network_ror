@@ -7,13 +7,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.string :provider
       t.string :uid
       t.string :name,               null: false
-      t.string :avatar,             null: false, default: ""
-      t.string :cover_photo
       t.string :color
       t.boolean :is_admin,                       default: false
       t.boolean :is_lock,                        default: false
-      t.integer :country_id
-      t.integer :city_id
       t.datetime :date_of_birth
       t.string :email,              null: false
       t.string :encrypted_password
@@ -42,6 +38,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts
       t.string   :unlock_token # Only if unlock strategy is :email or :both
       t.datetime :locked_at
+
+      # For counter cache
+      t.integer :posts_count, default: 0
 
       t.timestamps null: false
     end
