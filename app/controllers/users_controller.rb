@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :get_services, only: [ :index, :show, :edit, :update ]
+  before_action :get_services
   before_action :find_user, only: [ :edit, :update ]
   before_action :is_current_user, only: [ :edit, :update ]
   skip_before_action :finish_profile, only: [ :edit, :update ]
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = @user_service.get_user(current_user, params[:id])
+    @user = @user_service.find_user(current_user, params[:id])
     redirect_back(fallback_location: root_path) if @user.nil?
   end
 
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   end
 
   def find_user
-    @user = User.find(params[:id])
+    @user = @user_service.get_user(params[:id])
   end
 
   def is_current_user

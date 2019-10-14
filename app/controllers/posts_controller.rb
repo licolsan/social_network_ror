@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-  before_action :get_services, except: [ :show ]
+  before_action :get_services
   before_action :find_post, only: [ :show, :edit, :update, :destroy ]
   before_action :is_owner, only: [ :edit, :update, :destroy ]
 
@@ -44,7 +44,7 @@ class PostsController < ApplicationController
   private
 
   def find_post
-    @post = Post.find(params[:id])
+    @post = @post_service.get_post(params[:id])
   end
 
   def post_params
