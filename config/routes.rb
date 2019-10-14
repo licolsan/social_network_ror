@@ -8,9 +8,12 @@ Rails.application.routes.draw do
 
   resources :users, except: [ :new, :create, :destroy ]
 
-  resources :posts
-
   get "user/follow/:type" => "follow_relationships#index", as: "follow_list"
   post "follow/:id" => "follow_relationships#create", as: "follow"
   delete "unfollow/:id" => "follow_relationships#destroy", as: "unfollow"
+
+  resources :posts do
+    resources :comments, except: [ :index, :new ]
+  end
+  
 end

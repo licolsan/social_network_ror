@@ -1,4 +1,4 @@
 require 'test_helper'
 
-class CommentTest < ActiveSupport::TestCase
+class commentest < ActiveSupport::TestCase
 end

@@ -9,6 +9,8 @@ class PostsController < ApplicationController
   end
 
   def show
+    @comment = @comment_service.new_comment(@post)
+    @comments = @comment_service.get_all_comments(@post)
   end
 
   def new
@@ -59,6 +61,7 @@ class PostsController < ApplicationController
   end
 
   def get_services
+    @comment_service = CommentService.new
     @post_service = PostService.new
   end
 end

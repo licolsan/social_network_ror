@@ -2,6 +2,6 @@ class Comment < ApplicationRecord
   
   belongs_to :user
   belongs_to :commentable, polymorphic: true
-  has_many :comments, as: :commentable, inverse_of: :commentable
+  has_many :comments, as: :commentable, inverse_of: :commentable, dependent: :destroy
   
 end
