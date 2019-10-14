@@ -8,6 +8,8 @@ class User < ApplicationRecord
 	validates :name, presence: true
 	validates :avatar, presence: true
 	has_one_attached :avatar
+	has_many :posts, inverse_of: :owner
+	has_many :comments
 
 	acts_as_follower
 	acts_as_followable
