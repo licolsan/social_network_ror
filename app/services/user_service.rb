@@ -40,6 +40,12 @@ class UserService
     UserMailer.with(user: user).welcome_email.deliver_later
   end
 
+  def notify_new_post(user, post)
+    UserMailer.with(
+      owner: user, post: post
+    ).notify_new_post.deliver_later if user.followers_count > 0
+  end
+
   def is_current_user(current_user_id, target_user_id)
     current_user_id == target_user_id
   end

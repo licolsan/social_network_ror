@@ -25,6 +25,7 @@ class PostsController < ApplicationController
 
     if @post_service.save_post(@post)
       redirect_to @post, notice: "Post was successfully created."
+      @user_service.notify_new_post(current_user, @post)
     else
       render :new
     end
@@ -63,5 +64,6 @@ class PostsController < ApplicationController
   def get_services
     @comment_service = CommentService.new
     @post_service = PostService.new
+    @user_service = UserService.new
   end
 end
