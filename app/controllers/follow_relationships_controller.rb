@@ -26,6 +26,8 @@ class FollowRelationshipsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  private
+
   def get_services
     @user_service = UserService.new
   end
