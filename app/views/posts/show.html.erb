@@ -42,6 +42,9 @@
       <th>Owner</th>
       <td>|</td>
       <th>Content</th>
+      <td>|</td>
+      <th>Image</th>
+      <td>|</td>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -52,6 +55,14 @@
         <td><%= comment.user.email %></td>
         <td>|</td>
         <td><%= comment.content %></td>
+        <td>|</td>
+        <td>
+          <% if !comment.image.blank? %>
+            <%= image_tag comment.image, alt: "comment_image", class: "comment_avatar" %>
+          <% else %>
+            comment_image
+          <% end %>
+        </td>
         <td>|</td>
         <td><%= link_to 'Edit', edit_post_comment_path(@post, comment) %></td>
         <td>
