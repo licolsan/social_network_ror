@@ -16,7 +16,9 @@ class CommentsController < ApplicationController
     @comment = @comment_service.new_comment(
       @post, params: comment_params.merge({ user: current_user })
     )
-    @comment_service.save_comment(@comment)
+    if @comment_service.save_comment(@comment)
+      @user_service.notify_new_comment(current_user, @comment)
+    end
     redirect_back(fallback_location: root_path)
   end
 
@@ -64,6 +66,7 @@ class CommentsController < ApplicationController
   def get_services
     @comment_service = CommentService.new
     @post_service = PostService.new
+    @user_service = UserService.new
   end
 
 end

@@ -10,14 +10,24 @@ class UserMailer < ApplicationMailer
   end
 
   def notify_new_post
-    owner = params[:owner]
     @post = params[:post]
-    users = UserService.new.get_follower_of(owner)
-    users.each do |user|
-      mail(
-        to: user.email,
-        subject: "New post notification"
-      )
-    end
+    user = params[:user]
+    
+    mail(
+      to: user.email,
+      subject: "New post notification"
+    )
   end
+
+  def notify_new_comment
+    @owner = params[:owner]
+    @comment = params[:comment]
+    user = params[:user]
+
+    mail(
+      to: user.email,
+      subject: "New comment notification"
+    )
+  end
+
 end
