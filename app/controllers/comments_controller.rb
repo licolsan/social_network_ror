@@ -13,9 +13,14 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = @comment_service.new_comment(
-      @post, params: comment_params.merge({ user: current_user })
-    )
+    inputs = comment_params.merge({ user: current_user })
+    unless params[:comment_id].nil? # is this child coment?
+      parrent_comment = @comment_service.get_comment(params[:comment_id])
+      @comment = @comment_service.new_comment(parrent_comment, params: inputs)
+    else
+      @comment = @comment_service.new_comment(@post, params: inputs)
+    end
+
     if @comment_service.save_comment(@comment)
       @user_service.notify_new_comment(current_user, @comment)
     end
