@@ -3,8 +3,6 @@ class FollowRelationshipsController < ApplicationController
   FOLLOWING = "following"
   FOLLOWER = "follower"
 
-  before_action :get_services
-
   def index
     case params[:type]
     when FOLLOWING
@@ -32,9 +30,4 @@ class FollowRelationshipsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
-  private
-
-  def get_services
-    @user_service = UserService.new
-  end
 end

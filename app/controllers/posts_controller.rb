@@ -1,8 +1,6 @@
 class PostsController < ApplicationController
 
-  before_action :get_services
-  before_action :find_post, only: [ :show, :edit, :update, :destroy ]
-  before_action :is_owner, only: [ :edit, :update, :destroy ]
+  include PostAction
 
   def index
     @posts = @post_service.get_all_posts
@@ -46,24 +44,8 @@ class PostsController < ApplicationController
 
   private
 
-  def find_post
-    @post = @post_service.get_post(params[:id])
-  end
-
   def post_params
     params.require(:post).permit(:title, :content, :comments_count, images: [])
   end
 
-  def is_owner
-    if !@post_service.is_owner(current_user, @post)
-      flash[:notice] = "You are not owner of this post."
-      redirect_back(fallback_location: root_path)
-    end
-  end
-
-  def get_services
-    @comment_service = CommentService.new
-    @post_service = PostService.new
-    @user_service = UserService.new
-  end
 end
