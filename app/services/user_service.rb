@@ -17,11 +17,11 @@ class UserService
   end
 
   def get_user(id)
-    User.find(id)
+    User.find_by(id: id)
   end
 
   def find_user(current_user, target_user_id)
-    target_user = User.find(target_user_id)
+    target_user = User.find_by(id: target_user_id)
     if (
       current_user.following?(target_user) ||
       current_user.id == target_user.id

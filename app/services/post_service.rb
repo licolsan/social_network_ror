@@ -5,7 +5,7 @@ class PostService
   end
 
   def get_post(id)
-    Post.find(id)
+    Post.find_by(id: id)
   end
   
   def new_post(owner, params: {})
