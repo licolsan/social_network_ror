@@ -5,7 +5,7 @@ class CommentService
   end
 
   def get_comment(id)
-    Comment.find(id)
+    Comment.find_by(id: id)
   end
 
   def new_comment(parent, params: {})
