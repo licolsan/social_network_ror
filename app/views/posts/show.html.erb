@@ -45,6 +45,12 @@
       <td>|</td>
       <th>Image</th>
       <td>|</td>
+      <th>Operations</th>
+      <td>|</td>
+      <th>Comments</th>
+      <td>|</td>
+      <th>Add sub comment</th>
+      <td>|</td>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -72,6 +78,26 @@
               method: :delete,
               data: { confirm: "Are you sure?" }
           %>
+        </td>
+        <td>
+          <% comment.comments.each do |cmt| %>
+            <p><%= cmt.user.email %></p>
+            <p><%= cmt.content %></p>
+          <% end %>
+        </td>
+        <td>
+          <%= form_with(model: Comment.new, local: true, url: "/posts/#{@post.id}/comments/#{comment.id}/comments") do |fm| %>
+            <div class="field">
+              <%= fm.label :content %>
+              <%= fm.text_area :content %>
+              <%= fm.label :image %>
+              <%= fm.file_field :image %>
+            </div>
+
+            <div class="actions">
+              <%= fm.submit %>
+            </div>
+          <% end %>
         </td>
       </tr>
     <% end %>

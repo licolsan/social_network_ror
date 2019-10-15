@@ -1,7 +1,7 @@
 class CommentService
 
   def get_all_comments(parent)
-    parent.comments.all
+    parent.comments.all.includes("comments") # optimize for N+1 query issue
   end
 
   def get_comment(id)

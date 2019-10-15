@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   delete "unfollow/:id" => "follow_relationships#destroy", as: "unfollow"
 
   resources :posts do
-    resources :comments, except: [ :index, :new ]
+    resources :comments, except: [ :index, :new ] do
+      resources :comments, only: [ :create ]
+    end
   end
   
 end
