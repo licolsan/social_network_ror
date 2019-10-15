@@ -8,4 +8,6 @@ class Post < ApplicationRecord
   validates :content, presence: true
   validates :images, presence: true
 
+  acts_as_followable
+
 end

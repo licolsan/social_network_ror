@@ -6,5 +6,7 @@ class Comment < ApplicationRecord
   has_one_attached :image
 
   validates :content, presence: true
+
+  acts_as_followable
   
 end
