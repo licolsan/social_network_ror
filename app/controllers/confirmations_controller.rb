@@ -2,8 +2,6 @@
 
 class ConfirmationsController < Devise::ConfirmationsController
 
-  before_action :get_services, only: [ :show ]
-
   # GET /resource/confirmation/new
   def new
     super
@@ -32,9 +30,4 @@ class ConfirmationsController < Devise::ConfirmationsController
     super(resource_name, resource)
   end
 
-  private
-  
-  def get_services
-    @user_service = UserService.new
-  end
 end

@@ -3,8 +3,6 @@ class FollowRelationshipsController < ApplicationController
   FOLLOWING = "following"
   FOLLOWER = "follower"
 
-  before_action :get_services
-
   def index
     case params[:type]
     when FOLLOWING
@@ -17,18 +15,19 @@ class FollowRelationshipsController < ApplicationController
   end
 
   def create
-    @user_service.start_follow(current_user, User.find(params[:id]))
+    @user_service.start_follow(
+      current_user,
+      @user_service.get_user(params[:id])
+    )
     redirect_back(fallback_location: root_path)
   end
 
   def destroy
-    @user_service.stop_follow(current_user, User.find(params[:id]))
+    @user_service.stop_follow(
+      current_user,
+      @user_service.get_user(params[:id])
+    )
     redirect_back(fallback_location: root_path)
   end
 
-  private
-
-  def get_services
-    @user_service = UserService.new
-  end
 end
