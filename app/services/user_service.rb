@@ -41,9 +41,34 @@ class UserService
   end
 
   def notify_new_post(user, post)
-    UserMailer.with(
-      owner: user, post: post
-    ).notify_new_post.deliver_later if user.followers_count > 0
+    users = get_follower_of(user)
+
+    users.each do |u|
+      UserMailer.with(
+        post: post,
+        user: u
+      ).notify_new_post.deliver_later
+    end
+
+    start_follow(user, post)
+  end
+
+  def notify_new_comment(user, comment)
+    users =
+      comment.followers_by_type(user.class.name) +
+      comment.commentable.followers_by_type(user.class.name) -
+      [user]
+
+    users.each do |u|
+      UserMailer.with(
+        owner: user,
+        comment: comment,
+        user: u
+      ).notify_new_comment.deliver_later
+    end
+    
+    start_follow(user, comment)
+    start_follow(user, comment.commentable)
   end
 
   def is_current_user(current_user_id, target_user_id)
@@ -54,20 +79,20 @@ class UserService
     User.all_except(user)
   end
 
-  def get_following_of(current_user)
-    current_user.following_by_type(current_user.class.name)
+  def get_following_of(user)
+    user.following_by_type(user.class.name)
   end
 
-  def get_follower_of(current_user)
-    current_user.followers_by_type(current_user.class.name)
+  def get_follower_of(user)
+    user.followers_by_type(user.class.name)
   end
 
-  def start_follow(current_user, target_user)
-    current_user.follow(target_user)
+  def start_follow(user, target)
+    user.follow(target)
   end
 
-  def stop_follow(current_user, target_user)
-    current_user.stop_following(target_user)
+  def stop_follow(user, target)
+    user.stop_following(target)
   end
 
 end

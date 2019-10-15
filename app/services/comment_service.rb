@@ -24,9 +24,13 @@ class CommentService
     comment.destroy
   end
 
-  def is_permitted(user, comment)
+  def is_owner(user, comment)
+    comment.user_id == user.id
+  end
+
+  def is_destroyable(user, comment)
     (
-      comment.user_id == user.id ||
+      is_owner(user, comment) ||
       (
         comment.commentable.class.name == Post.name &&
         comment.commentable.user_id == user.id
